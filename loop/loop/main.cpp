@@ -7,9 +7,24 @@ int main()
 	int m = 0;
 	while (cin >> m)
 	{
+		if (m < 1)
+		{
+			cout << "m<1 error input m " << endl;
+			continue;
+
+		}
+
+
 		int n = 0;
 		cin >> n;
 		Loop loop;
+
+		while (n < 1)
+		{
+			cout << "n<1 error input n " << endl;
+			cin >> n;
+		}
+
 		for (int i = 0; i < n; i++)
 		{
 			int tmp = 0;
