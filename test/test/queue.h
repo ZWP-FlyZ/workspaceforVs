@@ -7,7 +7,7 @@
 */
 
 template <typename T>
-class Queue
+class Queue:public Container<T>
 {
 private:
 	struct Node

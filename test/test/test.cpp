@@ -1,69 +1,56 @@
 #pragma warning(disable:4996)
 
+#include <string>
 #include <iostream>
 #include "stack.h"
 #include "queue.h"
 #include "command.h"
-#include <string>
+
 using namespace std;
-
-void show(Stack<char> s)
-{
-	s.push(100);
-	while (s.isEmpty())
-	{	
-		char te = 0;
-		int state = s.pop(te);
-		cout << te << endl;
-	}
-}
-
-void show(Queue<char> s)
-{
-	s.push(100);
-	while (!s.isEmpty())
-	{
-		char te = 0;		
-		int state = s.pop(te);
-		cout << te;
-	}
-}
 
 
 int main()
 {
+
+	string tmpA = "";
+	string tmpB = "";
+	string tmpMsg = "";
+
 	Stack<char> stack;
-	Queue<char> queue;
+	Queue<char> queue;//结果队列
 
 	stack.clear();
+	cout << "A->";
+	if (cin >> tmpA, tmpA!="~")
+		A = tmpA;
+	cout << endl<<"B->";
+	if (cin >> tmpB, tmpB!="~")
+		B = tmpB;
+	cout << endl << "msg:";
+	if (cin >> tmpMsg, tmpMsg != "~")
+		msg = tmpMsg;
 
 
-	stack.push('B');
-	stack.push(')');
-	stack.push('z');
-	stack.push('g');
-	stack.push('x');
-	stack.push('n');
-	stack.push('h');
-	stack.push('e');
-	stack.push('(');
-	stack.push('B');
+	PushToCtn(msg,stack,1);//将魔王语言入栈
+	Decode(stack,queue);//解码获得结果
 
-	Decode(stack,queue);
 
-	char *t = new char[100];
+	//导出数组用于翻译
 	int len = queue.length();
+	char *t = new char[len+1];
 	queue.getArry(t, len);
 
+	//翻译语句
 	string sss = change(t, len);
 
 	show(queue);
-	cout << sss << endl;
+	cout<<endl << sss << endl;
 
-	int i = 0;
-	scanf("%d",&i);
-
+	delete[] t;
+	system("PAUSE");
 }
+
+
 
 
 

@@ -5,11 +5,13 @@
    使用顺序结构完成栈
 
 */
+
+#include "container.h"
 #define MAX_SIZE  100
 
 template <typename T>
 
-class Stack
+class Stack:public Container<T> 
 {
 private:
 	T * base;			//基地址

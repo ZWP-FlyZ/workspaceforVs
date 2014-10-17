@@ -5,6 +5,38 @@
 #include <string>
 using namespace std;
 
+extern string A		= "sae";
+extern string B		= "tAdA";
+extern string msg	= "B(ehnxgz)B";
+
+
+void show(Container<char> &s)
+{
+	s.push(100);
+	while (!s.isEmpty())
+	{
+		char te = 0;
+		int state = s.pop(te);
+		cout << te;
+	}
+}
+
+
+
+
+int PushToCtn(string &str, Container<char> &container,int back)//将string压入容器，back为1表示倒着入
+{
+	int len = str.length();
+	if (back)
+		while (len--)
+			container.push(str.c_str()[len]);
+	else
+		for (int i = 0; i < len; i++)
+			container.push(str.c_str()[i]);
+	return 0;
+}
+
+
 string change(char *c, int len)
 {
 	string tmp = "";
@@ -13,25 +45,28 @@ string change(char *c, int len)
 		switch (c[i])
 		{
 			case't':
-			tmp += "天"; break;
+				tmp += "天"; break;
 			case'd':
-			tmp += "地"; break;
+				tmp += "地"; break;
 			case's':
-			tmp += "上"; break;
+				tmp += "上"; break;
 			case'a':
-			tmp += "一只"; break;
+				tmp += "一只"; break;
 			case'e':
-			tmp += "鹅"; break;
+				tmp += "鹅"; break;
 			case'z':
-			tmp += "追"; break;
+				tmp += "追"; break;
 			case'g':
-			tmp += "赶"; break;
+				tmp += "赶"; break;
 			case'x':
-			tmp += "下"; break;
+				tmp += "下"; break;
 			case'n':
-			tmp += "蛋"; break;
+				tmp += "蛋"; break;
 			case'h':
-			tmp += "恨"; break;
+				tmp += "恨"; break;
+			default:
+				tmp += "*";
+		
 		}
 	}
 	return tmp;
@@ -53,24 +88,19 @@ int Decode(Stack<char> & stack, Queue<char> & result)
 		char tmp=0;
 		if (stack.pop(tmp) >= 0)
 		{
-			switch (tmp)
+			if		(tmp == 'A')
 			{
-			case'A':// A  ->  sae 
-				result.push('s');
-				result.push('a');
-				result.push('e');
-				break;
-			
-			case'B':// B  ->  tAdA 
-				stack.push('A');
-				stack.push('d');
-				stack.push('A');
-				stack.push('t');
-				break;
-			case'(':   
+				PushToCtn(A,result,0);
+			}
+			else if (tmp == 'B')
+			{
+				PushToCtn(B, stack, 1);
+			}
+			else if (tmp == '(')
+			{
 				Stmp.clear();
 				stack.pop(insert);
-				if (insert == ')')
+				if(insert == ')')
 					continue;
 				while (stack.pop(ctmp), ctmp != ')')
 					Stmp.push(ctmp);
@@ -81,11 +111,10 @@ int Decode(Stack<char> & stack, Queue<char> & result)
 					result.push(ctmp);
 				}
 				result.push(insert);
-				break;
-			default:
+			}
+			else 
 				result.push(tmp);
 
-			}
 		}
 		else return -1;	
 	}	
