@@ -20,8 +20,8 @@ public:
 
 	int put(char key, string val)
 	{
-		if		(uesd>26)				return -1;
-		else if (key<'A' || key>'Z')	return -2;
+		
+		if (key<'A' || key>'Z')	return -1;
 		else 
 		{
 			map[key - 'A'] = val;

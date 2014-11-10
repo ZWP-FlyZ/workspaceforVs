@@ -12,38 +12,41 @@ using namespace std;
 
 int main()
 {
+	char	key	=	0;
+	string	tmpMsg = "";
 
-	string tmpA = "";
-	string tmpB = "";
-	string tmpMsg = "";
-
-	Map map;
-
-	map.put('A', A);
-	map.put('B', B);
-
-	string test = "";
-
-	map.get('A', test);
-
-	cout << test << endl;
-
-	Stack<char> stack;
-	Queue<char> queue;//结果队列
+	Map map;			//映射图
+	Stack<char> stack;	//语言栈
+	Queue<char> queue;	//结果队列
 
 	stack.clear();
-	cout << "A->";
-	if (cin >> tmpA, tmpA!="~")
-		A = tmpA;
-	cout << endl<<"B->";
-	if (cin >> tmpB, tmpB!="~")
-		B = tmpB;
-	cout << endl << "msg:";
+
+	cout << "Input key: ";
+	while (cin >> key)
+	{
+		if		(key == '!')		break;
+		else if (key > 'Z' || key < 'A')
+		{
+			cout << endl << "Input key: ";
+			continue;
+		}
+		else
+		{
+			string val;
+			cout <<endl<< "Input valuse: ";
+			cin >> val;
+			map.put(key, val);
+		}
+		cout <<endl<<"Input key: ";
+	}
+
+
+	cout << endl << "Input  massage: ";
 	if (cin >> tmpMsg, tmpMsg != "~")
 		msg = tmpMsg;
 
-
 	PushToCtn(msg,stack,1);//将魔王语言入栈
+
 	Decode(stack, queue, map);//解码获得结果
 
 
@@ -54,7 +57,7 @@ int main()
 
 	//翻译语句
 	string sss = change(t, len);
-
+	
 	show(queue);
 	cout<<endl << sss << endl;
 

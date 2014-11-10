@@ -6,16 +6,11 @@
 #include "Map.h"
 using namespace std;
 
-extern string A		= "sae";
-extern string B		= "tAdA";
 extern string msg	= "B(ehnxgz)B";
-
-
-
 
 void show(Container<char> &s)
 {
-	s.push(100);
+	
 	while (!s.isEmpty())
 	{
 		char te = 0;
@@ -24,15 +19,12 @@ void show(Container<char> &s)
 	}
 }
 
-
-
-
 int PushToCtn(string &str, Container<char> &container,int back)//将string压入容器，back为1表示倒着入
 {
 	int len = str.length();
 	if (back)
-		while (len--)
-			container.push(str.c_str()[len]);
+		for (int i = len-1; i >=0 ; i--)
+			container.push(str.c_str()[i]);
 	else
 		for (int i = 0; i < len; i++)
 			container.push(str.c_str()[i]);
@@ -81,6 +73,7 @@ int Decode(Stack<char> & stack, Queue<char> & result,Map &map )
 {
 	char ctmp = 0;
 	char insert = 0;
+	string strTmp = "";
 
 	Stack<char> Stmp;	//缓存栈
 	result.clear();		//清空结果队列
@@ -89,15 +82,13 @@ int Decode(Stack<char> & stack, Queue<char> & result,Map &map )
 	while (!stack.isEmpty())
 	{
 		char tmp=0;
+		strTmp = "";
+
 		if (stack.pop(tmp) >= 0)
 		{
-			if		(tmp == 'A')
+			if (!map.get(tmp, strTmp))
 			{
-				PushToCtn(A, stack, 1);
-			}
-			else if (tmp == 'B')
-			{
-				PushToCtn(B, stack, 1);
+				PushToCtn(strTmp, stack, 1);
 			}
 			else if (tmp == '(')
 			{
