@@ -5,6 +5,7 @@
 #include "stack.h"
 #include "queue.h"
 #include "command.h"
+#include "Map.h"
 
 using namespace std;
 
@@ -15,6 +16,17 @@ int main()
 	string tmpA = "";
 	string tmpB = "";
 	string tmpMsg = "";
+
+	Map map;
+
+	map.put('A', A);
+	map.put('B', B);
+
+	string test = "";
+
+	map.get('A', test);
+
+	cout << test << endl;
 
 	Stack<char> stack;
 	Queue<char> queue;//结果队列
@@ -32,7 +44,7 @@ int main()
 
 
 	PushToCtn(msg,stack,1);//将魔王语言入栈
-	Decode(stack,queue);//解码获得结果
+	Decode(stack, queue, map);//解码获得结果
 
 
 	//导出数组用于翻译

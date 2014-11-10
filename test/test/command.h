@@ -3,11 +3,14 @@
 #include "stack.h"
 #include "queue.h"
 #include <string>
+#include "Map.h"
 using namespace std;
 
 extern string A		= "sae";
 extern string B		= "tAdA";
 extern string msg	= "B(ehnxgz)B";
+
+
 
 
 void show(Container<char> &s)
@@ -74,7 +77,7 @@ string change(char *c, int len)
 
 
 
-int Decode(Stack<char> & stack, Queue<char> & result)
+int Decode(Stack<char> & stack, Queue<char> & result,Map &map )
 {
 	char ctmp = 0;
 	char insert = 0;
@@ -90,7 +93,7 @@ int Decode(Stack<char> & stack, Queue<char> & result)
 		{
 			if		(tmp == 'A')
 			{
-				PushToCtn(A,result,0);
+				PushToCtn(A, stack, 1);
 			}
 			else if (tmp == 'B')
 			{
